@@ -8,14 +8,11 @@ ASCII_CHARS = "@%#*+=-:. "
 
 
 def get_ascii_char(pixel: int, invert: bool) -> str:
-    index = pixel * len(ASCII_CHARS) if invert else (255 - pixel) * len(ASCII_CHARS)
-    index //= 256
-    return ASCII_CHARS[index]
+    return ASCII_CHARS[pixel * len(ASCII_CHARS) // 256 if invert else (255 - pixel) * len(ASCII_CHARS) // 256]
 
 
 def pixels_to_ascii(image: Image, invert: bool) -> str:
-    pixels = image.get_flattened_data()
-    return ''.join(map(lambda pixel: get_ascii_char(pixel, invert), pixels))
+    return ''.join(map(lambda pixel: get_ascii_char(pixel, invert), image.get_flattened_data()))
 
 
 def image_to_ascii(image: Union[PathLike, Image], ratio: float, new_width: int, invert: bool) -> str:
@@ -27,7 +24,6 @@ def image_to_ascii(image: Union[PathLike, Image], ratio: float, new_width: int, 
             print(f"Failed to open image: {e}")
             return
 
-
     def resize_image(image: Image, ratio: float, new_width: int) -> Image:
         width, height = image.size
         new_ratio = height / width / ratio
@@ -37,13 +33,9 @@ def image_to_ascii(image: Union[PathLike, Image], ratio: float, new_width: int, 
     def grayscale_image(image: Image) -> Image:
         return image.convert("L")
 
-    image = resize_image(image, ratio, new_width)
-    image = grayscale_image(image)
-    ascii_str = pixels_to_ascii(image, invert=invert)
+    ascii_str = pixels_to_ascii(grayscale_image(resize_image(image, ratio, new_width)), invert=invert)
 
-    img_width = image.width
-
-    return "\n".join(ascii_str[i:i+img_width] for i in range(0, len(ascii_str), img_width))
+    return "\n".join(ascii_str[i:i+new_width] for i in range(0, len(ascii_str), new_width))
 
 
 def main(args):
