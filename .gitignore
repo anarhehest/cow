@@ -1,0 +1,41 @@
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+
+# Byte-compiled files
+*.py[cod]
+
+# Distribution and build directories
+build/
+dist/
+*.egg-info/
+
+# Virtual environment directories
+.venv/
+env/
+venv/
+
+# Egg and Wheel cache
+*.egg-info/
+*.whl
+
+# Other OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local configuration files
+*.db
+*.sqlite3
+
+# Logs
+*.log

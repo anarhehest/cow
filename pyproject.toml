@@ -1,0 +1,19 @@
+[project]
+name = "cow"
+authors = [
+    { name = "anarhehest" }
+]
+version = "0.1.0"
+description = "Convert images to ASCII art"
+requires-python = ">=3.10"
+dependencies = [
+    "pillow",
+    "streamlit",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+include = ["cli/*.py", "st.py"]
