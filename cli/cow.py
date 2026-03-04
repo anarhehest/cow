@@ -7,12 +7,11 @@ from PIL import Image
 ASCII_CHARS = "@%#*+=-:. "
 
 
-def get_ascii_char(pixel: int, invert: bool) -> str:
-    return ASCII_CHARS[pixel * len(ASCII_CHARS) // 256 if invert else (255 - pixel) * len(ASCII_CHARS) // 256]
-
-
 def pixels_to_ascii(image: Image, invert: bool) -> str:
-    return ''.join(map(lambda pixel: get_ascii_char(pixel, invert), image.get_flattened_data()))
+    return ''.join(map(
+        lambda p: ASCII_CHARS[p * len(ASCII_CHARS) // 256 if invert else (255 - p) * len(ASCII_CHARS) // 256],
+        image.get_flattened_data()
+    ))
 
 
 def image_to_ascii(image: Union[PathLike, Image], ratio: float, new_width: int, invert: bool) -> str:
@@ -38,7 +37,7 @@ def image_to_ascii(image: Union[PathLike, Image], ratio: float, new_width: int, 
     return "\n".join(ascii_str[i:i+new_width] for i in range(0, len(ascii_str), new_width))
 
 
-def main(args):
+def main(args) -> None:
     print(image_to_ascii(args.image_path, args.ratio, args.width, args.invert))
 
 
