@@ -13,4 +13,4 @@ OR cli for actually PROs
 ```shell
 uv run -m cli.cow [--width WIDTH] [--ratio RATIO] [--invert] image_path
 ```
-<img width="1710" height="1073" alt="Screenshot 2026-03-04 at 23 14 24" src="https://github.com/user-attachments/assets/1161a8de-8812-4bd3-aacf-7da28e703ac4" />
+<img width="1818" height="1121" alt="Screenshot 2026-03-05 at 13 30 50" src="https://github.com/user-attachments/assets/fdf5961b-dae2-4a8b-a49c-ff6eaaca09a1" />
